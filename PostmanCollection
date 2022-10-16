@@ -1,50 +1,165 @@
 {
 	"info": {
-		"_postman_id": "d2e36f52-d983-4de3-95f5-8a9bae4f6d77",
+		"_postman_id": "2e70ce4f-c644-4b1d-976a-b86efd2cfc9b",
 		"name": "Shop API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Products",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5000/api/products",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"products"
-					]
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/products/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get Product",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:5000/api/products/2",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"products",
-						"2"
-					]
+			"name": "Errors",
+			"item": [
+				{
+					"name": "Get not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/errors/not-found",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"errors",
+								"not-found"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get bad request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/errors/bad-request",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"errors",
+								"bad-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get unauthorised",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/errors/unauthorised",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"errors",
+								"unauthorised"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get validation errrors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/errors/validation-error",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"errors",
+								"validation-error"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get server error",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/errors/server-error",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"errors",
+								"server-error"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
