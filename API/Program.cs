@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen(options =>
 		Version = "v1"
 	});
 });
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddDbContext<StoreContext>(options =>
 {
 	options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -22,17 +24,19 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
 {
-	app.UseSwagger();
-	app.UseSwaggerUI(options =>
-	{
-		options.SwaggerEndpoint("/swagger/Shop%20API/swagger.json", "Shop API v1");
-		options.RoutePrefix = "api/docs";
-	});
-}
+	options.SwaggerEndpoint("/swagger/Shop%20API/swagger.json", "Shop API v1");
+	options.RoutePrefix = "api/docs";
+});
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors(options =>
 {

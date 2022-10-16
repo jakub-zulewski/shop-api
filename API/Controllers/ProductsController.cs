@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ProductsController : ControllerBase
+public class ProductsController : BaseAPIController
 {
 	private readonly StoreContext _storeContext;
 
@@ -28,7 +26,7 @@ public class ProductsController : ControllerBase
 		var product = await _storeContext.Products.FindAsync(id);
 
 		if (product is null)
-			return NoContent();
+			return NotFound();
 
 		return Ok(product);
 	}
