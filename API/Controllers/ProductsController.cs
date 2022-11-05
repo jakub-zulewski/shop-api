@@ -1,8 +1,8 @@
 ﻿using API.Data;
 using API.Entities;
 using API.Extensions;
+using API.RequestHelpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -16,14 +16,18 @@ public class ProductsController : BaseAPIController
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? orderBy,
-																   string? searchTerm,
-																   string? brands,
-																   string? types)
+	public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery] ProductParams productParams)
 	{
-		var query = _storeContext.Products.Sort(orderBy!).Search(searchTerm!).Filter(brands!, types!).AsQueryable();
+		var query = _storeContext.Products
+			.Sort(productParams.OrderBy!)
+			.Search(productParams.SearchTerm!)
+			.Filter(productParams.Brands!, productParams.Types!).AsQueryable();
 
-		return await query.ToListAsync();
+		var products = await PagedList<Product>.ToPagedList(query, productParams.PageNumber, productParams.PageSize);
+
+		Response.AddPaginationHeader(products.MetaData);
+
+		return Ok(products);
 	}
 
 	[HttpGet("{id:int}")]
