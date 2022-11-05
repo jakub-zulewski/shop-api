@@ -36,7 +36,7 @@ public class BasketController : BaseAPIController
 		var product = await _storeContext.Products.FindAsync(productId);
 
 		if (product is null)
-			return NotFound();
+			return BadRequest(new ProblemDetails { Title = "Product not found." });
 
 		basket.AddItem(product, quantity);
 
@@ -97,7 +97,7 @@ public class BasketController : BaseAPIController
 		return basket;
 	}
 
-	private BasketDTO MapBasketToDTO(Basket basket)
+	private static BasketDTO MapBasketToDTO(Basket basket)
 	{
 		return new BasketDTO
 		{

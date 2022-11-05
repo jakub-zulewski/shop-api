@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Entities;
+using API.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,11 @@ public class ProductsController : BaseAPIController
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+	public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string? orderBy)
 	{
-		return Ok(await _storeContext.Products.ToListAsync());
+		var query = _storeContext.Products.Sort(orderBy!).AsQueryable();
+
+		return await query.ToListAsync();
 	}
 
 	[HttpGet("{id:int}")]
