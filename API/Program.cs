@@ -1,5 +1,7 @@
 using API.Data;
+using API.Entities;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -20,6 +22,14 @@ builder.Services.AddDbContext<StoreContext>(options =>
 {
 	options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddIdentityCore<User>(options =>
+{
+	options.User.RequireUniqueEmail = true;
+})
+	.AddRoles<IdentityRole>()
+	.AddEntityFrameworkStores<StoreContext>();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 builder.Services.AddCors();
 
 var app = builder.Build();
@@ -54,9 +64,10 @@ using var scope = app.Services.CreateAsyncScope();
 try
 {
 	var storeContext = scope.ServiceProvider.GetRequiredService<StoreContext>();
+	var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
 	await storeContext.Database.MigrateAsync();
-	await DbInitializer.InitializeDatabase(storeContext);
+	await DbInitializer.InitializeDatabase(storeContext, userManager);
 }
 catch (Exception ex)
 {
