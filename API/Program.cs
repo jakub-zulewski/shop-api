@@ -20,6 +20,31 @@ builder.Services.AddSwaggerGen(options =>
 		Title = "Shop API",
 		Version = "v1"
 	});
+	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+	{
+		Description = "JWT authorization header",
+		Name = "Authorization",
+		In = ParameterLocation.Header,
+		Type = SecuritySchemeType.ApiKey,
+		Scheme = "Bearer"
+	});
+	options.AddSecurityRequirement(new OpenApiSecurityRequirement
+	{
+		{
+			new OpenApiSecurityScheme
+			{
+				Reference = new OpenApiReference
+				{
+					Type = ReferenceType.SecurityScheme,
+					Id = "Bearer"
+				},
+				Scheme = "oauth2",
+				Name = "Bearer",
+				In = ParameterLocation.Header
+			},
+			new List<string>()
+		}
+	});
 });
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddDbContext<StoreContext>(options =>

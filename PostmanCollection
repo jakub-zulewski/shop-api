@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5000/api/products",
+							"raw": "https://localhost:5000/api/products?orderBy=price&searchTerm=core&types=hats&brands=NetCore&pageNumber=1&pageSize=10",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -23,6 +23,32 @@
 							"path": [
 								"api",
 								"products"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "price"
+								},
+								{
+									"key": "searchTerm",
+									"value": "core"
+								},
+								{
+									"key": "types",
+									"value": "hats"
+								},
+								{
+									"key": "brands",
+									"value": "NetCore"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -44,6 +70,27 @@
 								"api",
 								"products",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Brands and Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5000/api/products/filters",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"filters"
 							]
 						}
 					},
@@ -239,6 +286,98 @@
 									"key": "quantity",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"jakub\",\r\n    \"password\": \"zaq1@WSX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5000/api/account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"franc\",\r\n    \"password\": \"zaq1@WSX\",\r\n    \"email\": \"franc@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5000/api/account/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqYWt1YkB0ZXN0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJKYWt1YiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJNZW1iZXIiLCJBZG1pbiJdLCJleHAiOjE2Njg1MzA5NTV9.7Wjm0aKCPwM2Dw7lZ54bRpaKbbJlFyvIGQmolojdEnG0a7zryw1s2rYS1FCshQLeByqJDDBNdqWXpL-DcV_hdw",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:5000/api/account/currentUser",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"account",
+								"currentUser"
 							]
 						}
 					},
